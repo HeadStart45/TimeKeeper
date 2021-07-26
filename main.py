@@ -56,7 +56,7 @@ class TaskSelector(GridLayout):
 class CountDown(GridLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.cols = 2
+        self.cols = 3
 
         self.timer = 0
         self.open = "0"
@@ -66,6 +66,9 @@ class CountDown(GridLayout):
         self.button = Button(text="Add")
         self.button.bind(on_press=self.addEntry)
 
+        self.taskselector = TaskSelector()
+
+        self.add_widget(self.taskselector)
         self.add_widget(self.counter)
         self.add_widget(self.button)
         Clock.schedule_interval(self.incrementTimer, 1)
@@ -86,15 +89,11 @@ class BaseWindow(GridLayout):
         super().__init__(**kwargs)
         self.cols = 1
         
-        self.selector = TaskSelector(size_hint_y=0.1)
-        
-        self.entries = ScrollOutput(size_hint_y=0.7)
+        self.entries = ScrollOutput(size_hint_y=0.9)
 
         self.timer = CountDown(size_hint_y=0.1)
 
     
-      
-        self.add_widget(self.selector)
         self.add_widget(self.timer)
         self.add_widget(self.entries)
 
